@@ -1,0 +1,11 @@
+# This file is defining Oracle sources files
+oracledbaix12gR1:
+  - /files/aix/oracle/database/12gR1/p17694377_121020_AIX64-5L_1of8.zip
+  - /files/aix/oracle/database/12gR1/p17694377_121020_AIX64-5L_2of8.zip
+oracledbaix12gR2:
+  - /files/aix/oracle/database/12gR2/aixppc64_12201_database.zip
+oracledbaix18c:
+  - /files/aix/oracle/database/18c/AIX.PPC64_180000_db_home.zip
+oracledbaix19c:
+  - /files/aix/oracle/database/19c/AIX.PPC64_193000_db_home.zip
+#oracle_source_files : "{{ oracledbaix12gR2 }}"

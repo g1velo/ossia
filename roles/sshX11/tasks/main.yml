@@ -1,0 +1,9 @@
+  - name: Uncomment line from /etc/ssh/sshd_config
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#X11Forwarding no.*$'
+      line: 'X11Forwarding yes'
+     #backup: yes
+  - name: restarting sshd
+    shell : " stopsrc -s sshd ; startsrc -s sshd "
+

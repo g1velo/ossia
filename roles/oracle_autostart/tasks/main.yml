@@ -1,0 +1,24 @@
+    - name: set database at autostart
+      lineinfile:
+        path: /etc/oratab
+        regexp: '^{{ ora_sid }}:'
+        line: "{{ora_sid}}:{{ora_home}}:Y"
+        backup: yes
+    - name:  generating startup shutodwn script
+      template:
+        src: ../templates/dbora
+        dest: /etc/dbora
+        owner: "{{ora_user}}"
+        group: "{{ora_group}}"
+        mode: '0750'
+    - name: Create symbolic links to the dbora script
+      file:
+        src: /etc/dbora
+        dest: /etc/rc.d/rc2.d/S99dbora
+        state: link
+    - name: Create symbolic links to the dbora script
+      file:
+        src: /etc/dbora
+        dest: /etc/rc.d/rc2.d/K01dbora
+        state: link
+

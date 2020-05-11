@@ -1,0 +1,10 @@
+##  script to run as source powervcrc to be able to run nova command ##
+export OS_USERNAME=root
+export OS_PASSWORD=powerlinux
+export OS_AUTH_URL=https://10.3.44.10:5000/v3/
+export OS_IDENTITY_API_VERSION=3
+export OS_CACERT=/var/lib/awx/projects/pvc_ansible/ossia/powervc.crt
+export OS_REGION_NAME=RegionOne
+export OS_USER_DOMAIN_NAME=Default export OS_PROJECT_DOMAIN_NAME=Default
+export OS_PROJECT_NAME=Ansible
+export OS_TENANT_NAME=ibm-default

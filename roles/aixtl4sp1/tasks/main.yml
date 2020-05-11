@@ -1,0 +1,10 @@
+  - name: Extract ossia scripts files
+    unarchive:
+       src: "{{ tl_file }}" 
+       dest:  "{{ ora_ossia_path }}"
+  - name: installing {{tl_file}} 
+    installp:
+      name: all
+      repository_path: "{{ ora_ossia_path }}/{{ tl_file }}"
+      package_license: yes
+

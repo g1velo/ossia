@@ -1,0 +1,11 @@
+{% for i in range(ora_redolog_list.number)%}
+  
+      <RedoLogGroupAttributes id="{{i}}">
+         <reuse>false</reuse>
+         <fileSize unit="KB">51200</fileSize>
+         <Thread>1</Thread>
+         <member ordinal="0" memberName="redo01.log" filepath="{{ora_data_fs}}/{{ora_sid}}/logs/"/>
+      </RedoLogGroupAttributes>
+{% endfor %}
+
+

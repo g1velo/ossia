@@ -1,0 +1,10 @@
+- name: trying to lookup 
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    # User defined variables for infrastructure
+    - vars/osvars.yml
+  tasks:
+    - debug: msg="Reverse DNS for 10.3.54.117 is {{ lookup('dig', '10.3.54.117/PTR') }}"
+    - name: Simple A record (IPV4 address) lookup for example.com
+      debug: msg="{{ lookup('dig', 'ibm.com')}}"

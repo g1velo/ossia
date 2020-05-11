@@ -1,0 +1,36 @@
+---
+- hosts: localhost
+  remote_user: awx
+  #script to run as source powervcrc to be able to run nova command ##
+  environment:
+    OS_USERNAME: root
+    OS_PASSWORD: powerlinux
+    OS_AUTH_URL: https://10.3.44.10:5000/v3/
+    OS_IDENTITY_API_VERSION: 3 
+    OS_CACERT: /var/lib/awx/projects/pvc_ansible/ossia/powervc.crt
+    OS_REGION_NAME: RegionOne
+    OS_USER_DOMAIN_NAME: Default 
+    OS_PROJECT_DOMAIN_NAME: Default
+    OS_PROJECT_NAME: Ansible
+    OS_TENANT_NAME: ibm-default
+  gather_facts: yes
+  vars_files:
+    - vars/osvars.yml
+    - vars/infra-vars.yml
+    - vars/oracle-vars.yml
+    - vars/oracle-bin.yml
+  vars: 
+    ip_adresses: []
+  roles:
+      - pvcsinglevm
+
+- hosts: just_added
+  remote_user: root
+  vars_files:
+    - vars/osvars.yml
+    - vars/infra-vars.yml
+    - vars/oracle-vars.yml
+    - vars/oracle-bin.yml
+  gather_facts: yes
+  roles:
+    - aix

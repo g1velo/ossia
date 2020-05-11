@@ -1,0 +1,11 @@
+ora_fs_list : 
+  - { lv_name: "orasid", size: 2 , fs_name: "" , owner: "{{ ora_user }}", group: "{{ ora_group }}", mode: '0775' } 
+  - { lv_name: "oralogs", size: 3, fs_name: "/logs" , owner: "{{ ora_user }}", group: "{{ ora_group }}", mode: '0775' } 
+  - { lv_name: "orasystem", size: 3, fs_name: "/system" , owner: "{{ ora_user }}", group: "{{ ora_group }}", mode: '0775' } 
+  - { lv_name: "orausers", size: 1, fs_name: "/users" , owner: "{{ ora_user }}", group: "{{ ora_group }}", mode: '0775' } 
+  - { lv_name: "oratemp", size: 1, fs_name: "/temp" , owner: "{{ ora_user }}", group: "{{ ora_group }}", mode: '0775' }
+  - { lv_name: "oraundo", size: 2, fs_name: "/undo" , owner: "{{ ora_user }}", group: "{{ ora_group }}", mode: '0775' }
+  - { lv_name: "oracontrol", size: 4, fs_name: "/control" , owner: "{{ ora_user }}", group: "{{ ora_group }}", mode: '0775' }
+  - { lv_name: "orafastrecovery", size: 8, fs_name: "/fast_recovery_area" , owner: "{{ ora_user }}", group: "{{ ora_group }}", mode: '0775' }
+ora_redolog_list: { number: 3 , prefix: "redo" , fs_name: "/logs" }
+ 

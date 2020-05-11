@@ -1,0 +1,45 @@
+---
+- hosts: all
+   # debug: var=ansible_facts
+  become: yes
+  gather_facts: yes
+  vars_files:
+    # User defined variables for infrastructure
+    - vars/infra-vars.yml
+    - vars/oracle-vars.yml
+  tasks :
+  - debug: var=ansible_facts
+  - name: Wait 300 seconds, but only start checking after 60 seconds
+    wait_for_connection:
+      delay: 1
+      timeout: 300
+
+  - name: Scan new devices
+    aix_devices:
+      device: all
+      state: available
+  - name: changing IOCP
+    shell: "chdev -l iocp0 -P  -a autoconfig='available'"
+    register: chiocp0
+  - debug:
+      msg : chiocp
+  - name: iocp value
+    shell: 'lsattr -El iocp0 -a autoconfig'
+    register: iocpattr
+  - debug:
+      msg: iocpattr " {{ iocpattr }} " 
+  - meta: end_play
+
+
+  - name: Reboot immediately if there was a change.
+    shell: "sleep 5 && shutdown -Fr"
+    async: 1
+    poll: 0
+    #when: chiocp0 is changed
+  - name: Wait for the reboot to complete if there was a change.
+    wait_for_connection:
+      connect_timeout: 20
+      sleep: 5
+      delay: 60
+      timeout: 600
+    #when: chiocp0 is changed  

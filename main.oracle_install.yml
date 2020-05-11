@@ -1,0 +1,24 @@
+---
+- hosts: all
+  remote_user: root
+  vars_files:
+    - vars/osvars.yml
+    - vars/infra-vars.yml
+    - vars/oracle-vars.yml
+    - vars/oracle-bin.yml
+  gather_facts: yes
+  roles:
+    #- r1
+    - aix
+    - oracle_install
+    - oracle_createdb
+  #tasks:
+    #- name: accessing value 
+      #shell: hostname
+      #register: sn
+    #- debug:
+        #msg : "{{sn}}"
+      #  msg: "{{hostvars['localhost']['h1var']}}"
+
+        #msg:  "{{h1var}}"
+

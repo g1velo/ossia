@@ -1,0 +1,5 @@
+  - name: Generating Database creation template file 
+    template: 
+      src: ../templates/smart_sn.j2
+      dest: "/tmp/smart1.dbt"
+      mode: '0774'

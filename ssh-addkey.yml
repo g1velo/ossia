@@ -1,0 +1,17 @@
+#ssh-addkey.yml 
+---
+- hosts: all 
+  gather_facts: no 
+
+  tasks:
+  - name: Set authorized key taken from file
+    authorized_key:
+      user: root
+      state: present
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAd8LZiRUtk3vrTPrWWzJYHWMjuV7+0Ld1z6cDKQ7y/WKbKTIEKZm63Jpy9RVEexIX418P7ZrFGvPBhA0bsavtW3Kdhms1IN5FFI+FjZPZF1xPj61NFKS7tINokPxZ6gTWqmIhW4q4VHvxEU0l9s2Yj7/LHDuVD075Mt6tIuA55tAp05pgJLErhj+m5/xgtoctdj09sbKxdn/ulh+RiTgKWc1CWlVeXKk4PjlVKKOP72dZkX0TuIw22cmMkk/8PYhr94+7JvgRjxswG1+7u1wlNed0B8wlHIKWEE2r/3uRniH7lWr0AX5/OpR4PHAYma4z5rwK+hrEjUOoBjqlnWsf ste@stelinux"
+  - name: Set authorized key taken from file
+    authorized_key:
+      user: oracle
+      state: present
+      key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDAd8LZiRUtk3vrTPrWWzJYHWMjuV7+0Ld1z6cDKQ7y/WKbKTIEKZm63Jpy9RVEexIX418P7ZrFGvPBhA0bsavtW3Kdhms1IN5FFI+FjZPZF1xPj61NFKS7tINokPxZ6gTWqmIhW4q4VHvxEU0l9s2Yj7/LHDuVD075Mt6tIuA55tAp05pgJLErhj+m5/xgtoctdj09sbKxdn/ulh+RiTgKWc1CWlVeXKk4PjlVKKOP72dZkX0TuIw22cmMkk/8PYhr94+7JvgRjxswG1+7u1wlNed0B8wlHIKWEE2r/3uRniH7lWr0AX5/OpR4PHAYma4z5rwK+hrEjUOoBjqlnWsf ste@stelinux"
+

@@ -1,0 +1,1416 @@
+
+PLAY [all] ****************************************************************************************************
+
+TASK [Gathering Facts] ****************************************************************************************
+ok: [10.3.54.108]
+
+TASK [listing iocp attribute to check if reboot is required] **************************************************
+changed: [10.3.54.108]
+
+TASK [value of ansiblefacts] **********************************************************************************
+ok: [10.3.54.108] => {
+    "msg": {
+        "_facts_gathered": true, 
+        "all_ipv4_addresses": [
+            "10.3.54.108"
+        ], 
+        "all_ipv6_addresses": [
+            "::1%1"
+        ], 
+        "ansible_local": {}, 
+        "apparmor": {
+            "status": "disabled"
+        }, 
+        "architecture": "chrp", 
+        "date_time": {
+            "date": "2020-03-17", 
+            "day": "17", 
+            "epoch": "1584461566", 
+            "hour": "17", 
+            "iso8601": "2020-03-17T16:12:46Z", 
+            "iso8601_basic": "20200317T171246767184", 
+            "iso8601_basic_short": "20200317T171246", 
+            "iso8601_micro": "2020-03-17T16:12:46.767484Z", 
+            "minute": "12", 
+            "month": "03", 
+            "second": "46", 
+            "time": "17:12:46", 
+            "tz": "CET", 
+            "tz_offset": "CET", 
+            "weekday": "Tuesday", 
+            "weekday_number": "2", 
+            "weeknumber": "11", 
+            "year": "2020"
+        }, 
+        "default_ipv4": {
+            "address": "10.3.54.108", 
+            "broadcast": "10.3.54.255", 
+            "device": "en0", 
+            "flags": [
+                "UP", 
+                "BROADCAST", 
+                "NOTRAILERS", 
+                "RUNNING", 
+                "SIMPLEX", 
+                "MULTICAST", 
+                "GROUPRT", 
+                "64BIT", 
+                "CHECKSUM_OFFLOAD(ACTIVE)", 
+                "LARGESEND", 
+                "CHAIN"
+            ], 
+            "gateway": "10.3.54.254", 
+            "interface": "en0", 
+            "macaddress": "fa:5c:c7:34:f5:20", 
+            "mtu": "1500", 
+            "netmask": "255.255.255.0", 
+            "network": "10.3.54.0", 
+            "type": "ether"
+        }, 
+        "default_ipv6": {}, 
+        "devices": {
+            "L2cache0": {
+                "attributes": {
+                    "size": "0"
+                }, 
+                "state": "Available", 
+                "type": "L2 Cache"
+            }, 
+            "cache0": {
+                "attributes": {
+                    "auto_grab_ssd": "no", 
+                    "cache_enable": "1", 
+                    "cache_engine": "cengine0", 
+                    "cfg_persist": "1"
+                }, 
+                "state": "Defined", 
+                "type": "SSD Cache virtual device"
+            }, 
+            "cd0": {
+                "attributes": {
+                    "prevent_eject": "yes"
+                }, 
+                "state": "Defined", 
+                "type": "Virtual SCSI Optical Served by VIO Server"
+            }, 
+            "cengine0": {
+                "attributes": {
+                    "cache_per_tgt": "1", 
+                    "cepath": "/usr/ccs/lib/libcehandler.a", 
+                    "max_partition": "1", 
+                    "max_pool": "1", 
+                    "tgt_per_cache": "unlimited"
+                }, 
+                "state": "Defined", 
+                "type": "SSD Cache engine"
+            }, 
+            "cluster0": {
+                "attributes": {
+                    "clrpvid": "00000000000000000000000000000000", 
+                    "clvdisk": "00000000-0000-0000-0000-000000000000", 
+                    "configure": "yes", 
+                    "node_uuid": "e1288562-63c8-11ea-8003-fa5cc734f520"
+                }, 
+                "state": "Available", 
+                "type": "Cluster Node"
+            }, 
+            "datavg": {
+                "attributes": {
+                    "auto_on": "y", 
+                    "cache_pbuf_cnt": "0", 
+                    "conc_auto_on": "n", 
+                    "conc_capable": "n", 
+                    "gbl_pbufs_ppv": "0", 
+                    "gbl_pbufs_pvg": "0", 
+                    "timestamp": "5e70f5020e6771e4", 
+                    "vg_pbufs_ppv": "0", 
+                    "vgserial_id": "00f92bab00004c0000000170e93cc222", 
+                    "workQ_size": "256"
+                }, 
+                "state": "Available", 
+                "type": "Volume group"
+            }, 
+            "en0": {
+                "attributes": {
+                    "alias4": "IPv4", 
+                    "alias6": "IPv6", 
+                    "arp": "on", 
+                    "authority": "Authorized", 
+                    "broadcast": "Broadcast", 
+                    "monitor": "off", 
+                    "mtu": "1500", 
+                    "mtu_bypass": "on", 
+                    "netaddr": "10.3.54.108", 
+                    "netaddr6": "IPv6", 
+                    "netmask": "255.255.255.0", 
+                    "prefixlen": "Prefix", 
+                    "remmtu": "576", 
+                    "rfc1323": "Enable/Disable", 
+                    "security": "none", 
+                    "state": "up", 
+                    "tcp_mssdflt": "Set", 
+                    "tcp_nodelay": "Enable/Disable", 
+                    "tcp_recvspace": "Set", 
+                    "tcp_sendspace": "Set", 
+                    "thread": "off"
+                }, 
+                "state": "Available", 
+                "type": "Standard Ethernet Network Interface"
+            }, 
+            "ent0": {
+                "attributes": {
+                    "alt_addr": "0x000000000000", 
+                    "buf_mode": "max_min", 
+                    "chksum_offload": "yes", 
+                    "copy_buffs": "32", 
+                    "copy_bytes": "65536", 
+                    "desired_mapmem": "0", 
+                    "ipv6_offload": "no", 
+                    "max_buf_control": "64", 
+                    "max_buf_huge": "64", 
+                    "max_buf_large": "64", 
+                    "max_buf_medium": "256", 
+                    "max_buf_small": "2048", 
+                    "max_buf_tiny": "2048", 
+                    "min_buf_control": "24", 
+                    "min_buf_huge": "24", 
+                    "min_buf_large": "24", 
+                    "min_buf_medium": "128", 
+                    "min_buf_small": "512", 
+                    "min_buf_tiny": "512", 
+                    "poll_uplink": "no", 
+                    "poll_uplink_int": "1000", 
+                    "trace_debug": "no", 
+                    "use_alt_addr": "no"
+                }, 
+                "state": "Available", 
+                "type": "Virtual I/O Ethernet Adapter (l-lan)"
+            }, 
+            "et0": {
+                "attributes": {
+                    "alias4": "IPv4", 
+                    "alias6": "IPv6", 
+                    "arp": "on", 
+                    "authority": "Authorized", 
+                    "broadcast": "Broadcast", 
+                    "mtu": "1492", 
+                    "netaddr": "Internet", 
+                    "netaddr6": "IPv6", 
+                    "netmask": "Subnet", 
+                    "prefixlen": "Prefix", 
+                    "remmtu": "576", 
+                    "rfc1323": "Enable/Disable", 
+                    "security": "none", 
+                    "state": "down", 
+                    "tcp_mssdflt": "Set", 
+                    "tcp_nodelay": "Enable/Disable", 
+                    "tcp_recvspace": "Set", 
+                    "tcp_sendspace": "Set"
+                }, 
+                "state": "Defined", 
+                "type": "IEEE 802.3 Ethernet Network Interface"
+            }, 
+            "fslv00": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "m", 
+                    "label": "/tmp/ossia", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.13", 
+                    "relocatable": "y", 
+                    "size": "128", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "fslv01": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "m", 
+                    "label": "/oracle", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.14", 
+                    "relocatable": "y", 
+                    "size": "320", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Available", 
+                "type": "Logical volume"
+            }, 
+            "hd1": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "c", 
+                    "label": "/home", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.8", 
+                    "relocatable": "y", 
+                    "size": "33", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hd10opt": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "c", 
+                    "label": "/opt", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.9", 
+                    "relocatable": "y", 
+                    "size": "29", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hd11admin": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "c", 
+                    "label": "/admin", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.10", 
+                    "relocatable": "y", 
+                    "size": "4", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hd2": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "c", 
+                    "label": "/usr", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.5", 
+                    "relocatable": "y", 
+                    "size": "69", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hd3": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "c", 
+                    "label": "/tmp", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.7", 
+                    "relocatable": "y", 
+                    "size": "128", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hd4": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "c", 
+                    "label": "/", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.4", 
+                    "relocatable": "y", 
+                    "size": "15", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hd5": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "e", 
+                    "label": "primary_bootlv", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.1", 
+                    "relocatable": "n", 
+                    "size": "1", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "boot", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hd6": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "m", 
+                    "label": "None", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.2", 
+                    "relocatable": "y", 
+                    "size": "16", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "paging", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hd8": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "c", 
+                    "label": "None", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.3", 
+                    "relocatable": "y", 
+                    "size": "1", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2log", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hd9var": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "c", 
+                    "label": "/var", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.6", 
+                    "relocatable": "y", 
+                    "size": "11", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "hdisk0": {
+                "attributes": {
+                    "PCM": "PCM/friend/vscsi", 
+                    "algorithm": "fail_over", 
+                    "hcheck_cmd": "test_unit_rdy", 
+                    "hcheck_interval": "60", 
+                    "hcheck_mode": "nonactive", 
+                    "max_transfer": "0x40000", 
+                    "pvid": "00f92babaf2d8f530000000000000000", 
+                    "queue_depth": "3", 
+                    "reserve_policy": "no_reserve"
+                }, 
+                "state": "Available", 
+                "type": "Virtual SCSI Disk Drive"
+            }, 
+            "hdisk1": {
+                "attributes": {
+                    "PCM": "PCM/friend/vscsi", 
+                    "algorithm": "fail_over", 
+                    "hcheck_cmd": "test_unit_rdy", 
+                    "hcheck_interval": "0", 
+                    "hcheck_mode": "nonactive", 
+                    "max_transfer": "0x40000", 
+                    "pvid": "00f92babcb9539000000000000000000", 
+                    "queue_depth": "3", 
+                    "reserve_policy": "no_reserve"
+                }, 
+                "state": "Available", 
+                "type": "Virtual SCSI Disk Drive"
+            }, 
+            "hdisk2": {
+                "attributes": {
+                    "PCM": "PCM/friend/vscsi", 
+                    "algorithm": "fail_over", 
+                    "hcheck_cmd": "test_unit_rdy", 
+                    "hcheck_interval": "0", 
+                    "hcheck_mode": "nonactive", 
+                    "max_transfer": "0x40000", 
+                    "pvid": "00f92babcb9d23660000000000000000", 
+                    "queue_depth": "3", 
+                    "reserve_policy": "no_reserve"
+                }, 
+                "state": "Available", 
+                "type": "Virtual SCSI Disk Drive"
+            }, 
+            "inet0": {
+                "attributes": {
+                    "authm": "65536", 
+                    "bootup_option": "no", 
+                    "gateway": "Gateway", 
+                    "hostname": "ansible6", 
+                    "rout6": "IPv6", 
+                    "route": "net,-hopcount,0,,0,10.3.54.254"
+                }, 
+                "state": "Available", 
+                "type": "Internet Network Extension"
+            }, 
+            "iocp0": {
+                "attributes": {
+                    "autoconfig": "available"
+                }, 
+                "state": "Available", 
+                "type": "I/O Completion Ports"
+            }, 
+            "iscsi0": {
+                "attributes": {
+                    "disc_filename": "/etc/iscsi/targets", 
+                    "disc_policy": "file", 
+                    "initiator_name": "iqn.localhost.hostid.7f000001", 
+                    "isns_srvnames": "auto", 
+                    "isns_srvports": "iSNS", 
+                    "max_targets": "16", 
+                    "num_cmd_elems": "200"
+                }, 
+                "state": "Available", 
+                "type": "iSCSI Protocol Device"
+            }, 
+            "lg_dumplv": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "m", 
+                    "label": "None", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.11", 
+                    "relocatable": "y", 
+                    "size": "32", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "sysdump", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "livedump": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "m", 
+                    "label": "/var/adm/ras/livedump", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.12", 
+                    "relocatable": "y", 
+                    "size": "8", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "lo0": {
+                "attributes": {
+                    "mtu": "16896", 
+                    "netaddr": "127.0.0.1", 
+                    "netaddr6": "::1", 
+                    "netmask": "Subnet", 
+                    "prefixlen": "IPv6", 
+                    "rfc1323": "Enable/Disable", 
+                    "state": "up", 
+                    "tcp_mssdflt": "Set", 
+                    "tcp_nodelay": "Enable/Disable", 
+                    "tcp_recvspace": "Set", 
+                    "tcp_sendspace": "Set"
+                }, 
+                "state": "Available", 
+                "type": "Loopback Network Interface"
+            }, 
+            "loglv00": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "m", 
+                    "label": "None", 
+                    "lvserial_id": "00f92bab00004c0000000170e93cc222.2", 
+                    "relocatable": "y", 
+                    "size": "1", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2log", 
+                    "upperbound": "1024"
+                }, 
+                "state": "Available", 
+                "type": "Logical volume"
+            }, 
+            "lvdd": {
+                "attributes": {}, 
+                "state": "Available", 
+                "type": "LVM Device Driver"
+            }, 
+            "mem0": {
+                "attributes": {
+                    "ent_mem_cap": "I/O", 
+                    "goodsize": "4096", 
+                    "mem_exp_factor": "Memory", 
+                    "size": "4096", 
+                    "var_mem_weight": "Variable"
+                }, 
+                "state": "Available", 
+                "type": "Memory"
+            }, 
+            "oraclelv": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "m", 
+                    "intra": "m", 
+                    "label": "None", 
+                    "lvserial_id": "00f92bab00004c0000000170af2d8f81.15", 
+                    "relocatable": "y", 
+                    "size": "1", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "32"
+                }, 
+                "state": "Defined", 
+                "type": "Logical volume"
+            }, 
+            "oralogs": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "x", 
+                    "intra": "m", 
+                    "label": "/oradata/DB2/logs", 
+                    "lvserial_id": "00f92bab00004c0000000170e93cc222.3", 
+                    "relocatable": "y", 
+                    "size": "768", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "1024"
+                }, 
+                "state": "Available", 
+                "type": "Logical volume"
+            }, 
+            "orasid": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "x", 
+                    "intra": "m", 
+                    "label": "/oradata/DB2", 
+                    "lvserial_id": "00f92bab00004c0000000170e93cc222.1", 
+                    "relocatable": "y", 
+                    "size": "512", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "1024"
+                }, 
+                "state": "Available", 
+                "type": "Logical volume"
+            }, 
+            "orasystem": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "x", 
+                    "intra": "m", 
+                    "label": "/oradata/DB2/system", 
+                    "lvserial_id": "00f92bab00004c0000000170e93cc222.4", 
+                    "relocatable": "y", 
+                    "size": "768", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "1024"
+                }, 
+                "state": "Available", 
+                "type": "Logical volume"
+            }, 
+            "oratemp": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "x", 
+                    "intra": "m", 
+                    "label": "/oradata/DB2/temp", 
+                    "lvserial_id": "00f92bab00004c0000000170e93cc222.6", 
+                    "relocatable": "y", 
+                    "size": "256", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "1024"
+                }, 
+                "state": "Available", 
+                "type": "Logical volume"
+            }, 
+            "oraundo": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "x", 
+                    "intra": "m", 
+                    "label": "/oradata/DB2/undo", 
+                    "lvserial_id": "00f92bab00004c0000000170e93cc222.7", 
+                    "relocatable": "y", 
+                    "size": "512", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "1024"
+                }, 
+                "state": "Available", 
+                "type": "Logical volume"
+            }, 
+            "orausers": {
+                "attributes": {
+                    "copies": "1", 
+                    "inter": "x", 
+                    "intra": "m", 
+                    "label": "/oradata/DB2/users", 
+                    "lvserial_id": "00f92bab00004c0000000170e93cc222.5", 
+                    "relocatable": "y", 
+                    "size": "256", 
+                    "strictness": "y", 
+                    "stripe_size": "Stripe", 
+                    "stripe_width": "Striping", 
+                    "type": "jfs2", 
+                    "upperbound": "1024"
+                }, 
+                "state": "Available", 
+                "type": "Logical volume"
+            }, 
+            "pkcs11": {
+                "attributes": {
+                    "comp_trace": "no", 
+                    "io_threads": "8", 
+                    "proc_heap_sz": "8", 
+                    "trc_adm": "no", 
+                    "trc_clic": "no", 
+                    "trc_context": "no", 
+                    "trc_dd": "no", 
+                    "trc_hw": "no", 
+                    "trc_io": "no", 
+                    "trc_k_klib": "no", 
+                    "trc_k_ulib": "no", 
+                    "trc_malloc": "no", 
+                    "trc_meta": "no", 
+                    "trc_mmap": "no", 
+                    "trc_obj": "no", 
+                    "trc_req": "no", 
+                    "trc_sess": "no", 
+                    "trc_slot": "no", 
+                    "trc_token": "no", 
+                    "trc_u_lib": "no", 
+                    "trc_util": "no", 
+                    "y4_max_req": "16"
+                }, 
+                "state": "Available", 
+                "type": "ACF/PKCS#11 Device"
+            }, 
+            "proc0": {
+                "attributes": {
+                    "frequency": "4157000000", 
+                    "smt_enabled": "true", 
+                    "smt_threads": "8", 
+                    "state": "enable", 
+                    "type": "PowerPC_POWER8"
+                }, 
+                "state": "Available", 
+                "type": "00-00 Processor"
+            }, 
+            "proc8": {
+                "attributes": {
+                    "frequency": "4157000000", 
+                    "smt_enabled": "true", 
+                    "smt_threads": "8", 
+                    "state": "enable", 
+                    "type": "PowerPC_POWER8"
+                }, 
+                "state": "Defined", 
+                "type": "00-08 Processor"
+            }, 
+            "pty0": {
+                "attributes": {
+                    "ATTnum": "256", 
+                    "BSDnum": "16", 
+                    "autoconfig": "available", 
+                    "csmap": "sbcs"
+                }, 
+                "state": "Available", 
+                "type": "Asynchronous Pseudo-Terminal"
+            }, 
+            "rcm0": {
+                "attributes": {}, 
+                "state": "Defined", 
+                "type": "Rendering Context Manager Subsystem"
+            }, 
+            "rootvg": {
+                "attributes": {
+                    "auto_on": "n", 
+                    "cache_pbuf_cnt": "0", 
+                    "conc_auto_on": "n", 
+                    "conc_capable": "n", 
+                    "gbl_pbufs_ppv": "0", 
+                    "gbl_pbufs_pvg": "0", 
+                    "timestamp": "5e70f33713a440c7", 
+                    "vg_pbufs_ppv": "0", 
+                    "vgserial_id": "00f92bab00004c0000000170af2d8f81", 
+                    "workQ_size": "256"
+                }, 
+                "state": "Defined", 
+                "type": "Volume group"
+            }, 
+            "sfw0": {
+                "attributes": {
+                    "enable_sas": "no", 
+                    "vltag": "3358"
+                }, 
+                "state": "Available", 
+                "type": "Storage Framework Module"
+            }, 
+            "sys0": {
+                "attributes": {
+                    "SW_dist_intr": "false", 
+                    "autorestart": "true", 
+                    "boottype": "disk", 
+                    "capacity_inc": "0.01", 
+                    "capped": "false", 
+                    "chown_restrict": "true", 
+                    "clouddev": "0", 
+                    "conslogin": "enable", 
+                    "cpuguard": "enable", 
+                    "dedicated": "false", 
+                    "enhanced_RBAC": "true", 
+                    "ent_capacity": "0.10", 
+                    "ex_intr_virt": "false", 
+                    "frequency": "1600000000", 
+                    "fullcore": "false", 
+                    "fwversion": "IBM,FW860.80", 
+                    "ghostdev": "1", 
+                    "id_to_partition": "0X800003B4B0B0000C", 
+                    "id_to_system": "0X800003B4B0B00000", 
+                    "iostat": "false", 
+                    "keylock": "normal", 
+                    "log_pg_dealloc": "true", 
+                    "max_capacity": "0.80", 
+                    "max_logname": "9", 
+                    "maxbuf": "20", 
+                    "maxmbuf": "0", 
+                    "maxpout": "8193", 
+                    "maxuproc": "10000", 
+                    "min_capacity": "0.10", 
+                    "minpout": "4096", 
+                    "modelname": "IBM,8286-42A", 
+                    "ncargs": "256", 
+                    "nfs4_acl_compat": "secure", 
+                    "ngroups_allowed": "128", 
+                    "os_uuid": "7614dc53-b01c-4558-af7e-b6c6ec015882", 
+                    "partition_uuid": "61e647ed-8a19-4537-bd7a-a5cae24b2753", 
+                    "pre430core": "false", 
+                    "pre520tune": "disable", 
+                    "realmem": "4194304", 
+                    "rtasversion": "1", 
+                    "sed_config": "select", 
+                    "systemid": "IBM,02102BABV", 
+                    "variable_weight": "128"
+                }, 
+                "state": "Available", 
+                "type": "System Object"
+            }, 
+            "sysplanar0": {
+                "attributes": {}, 
+                "state": "Available", 
+                "type": "System Planar"
+            }, 
+            "vio0": {
+                "attributes": {
+                    "bus_id": "0x90000340"
+                }, 
+                "state": "Available", 
+                "type": "Virtual I/O Bus"
+            }, 
+            "vsa0": {
+                "attributes": {
+                    "desired_mapmem": "I/O"
+                }, 
+                "state": "Available", 
+                "type": "LPAR Virtual Serial Adapter"
+            }, 
+            "vscsi0": {
+                "attributes": {
+                    "rw_timeout": "300", 
+                    "vscsi_err_recov": "delayed_fail", 
+                    "vscsi_path_to": "0"
+                }, 
+                "state": "Available", 
+                "type": "Virtual SCSI Client Adapter"
+            }, 
+            "vscsi1": {
+                "attributes": {
+                    "rw_timeout": "300", 
+                    "vscsi_err_recov": "delayed_fail", 
+                    "vscsi_path_to": "0"
+                }, 
+                "state": "Available", 
+                "type": "Virtual SCSI Client Adapter"
+            }, 
+            "vty0": {
+                "attributes": {
+                    "autoconfig": "available", 
+                    "bpc": "8", 
+                    "csmap": "sbcs", 
+                    "discard": "^o", 
+                    "dsusp": "^y", 
+                    "eof": "^d", 
+                    "eol": "^@", 
+                    "eol2": "^?", 
+                    "erase": "^h", 
+                    "flow_disp": "xon", 
+                    "imap": "none", 
+                    "intr": "^c", 
+                    "kill": "^u", 
+                    "lnext": "^v", 
+                    "logger": "LOGGER", 
+                    "login": "disable", 
+                    "logmodes": "hupcl,cread,echoe,cs8", 
+                    "modules": "ldterm", 
+                    "omap": "none", 
+                    "open_disp": "dtropen", 
+                    "parity": "none", 
+                    "quit": "^\\", 
+                    "reprint": "^r", 
+                    "runmodes": "hupcl,cread,brkint,icrnl,opost,tab3,onlcr,isig,icanon,echo,echoe,echok,echoctl,echoke,imaxbel,iexten", 
+                    "speed": "19200", 
+                    "start": "^q", 
+                    "stop": "^s", 
+                    "stops": "1", 
+                    "susp": "^z", 
+                    "term": "vt220", 
+                    "timeout": "0", 
+                    "werase": "^w"
+                }, 
+                "state": "Available", 
+                "type": "Asynchronous Terminal"
+            }
+        }, 
+        "discovered_interpreter_python": "/usr/bin/python", 
+        "distribution": "AIX", 
+        "distribution_major_version": "7", 
+        "distribution_release": "2", 
+        "distribution_version": "7.2", 
+        "dns": {
+            "nameservers": [
+                "10.16.1.16", 
+                "10.11.5.2"
+            ], 
+            "search": [
+                "power.com"
+            ]
+        }, 
+        "domain": "", 
+        "effective_group_id": 0, 
+        "effective_user_id": 0, 
+        "en0": {
+            "device": "en0", 
+            "flags": [
+                "UP", 
+                "BROADCAST", 
+                "NOTRAILERS", 
+                "RUNNING", 
+                "SIMPLEX", 
+                "MULTICAST", 
+                "GROUPRT", 
+                "64BIT", 
+                "CHECKSUM_OFFLOAD(ACTIVE)", 
+                "LARGESEND", 
+                "CHAIN"
+            ], 
+            "ipv4": [
+                {
+                    "address": "10.3.54.108", 
+                    "broadcast": "10.3.54.255", 
+                    "netmask": "255.255.255.0", 
+                    "network": "10.3.54.0"
+                }
+            ], 
+            "ipv6": [], 
+            "macaddress": "fa:5c:c7:34:f5:20", 
+            "mtu": "1500", 
+            "type": "ether"
+        }, 
+        "env": {
+            "AUTHSTATE": "compat", 
+            "CLCMD_PASSTHRU": "1", 
+            "HOME": "/", 
+            "LANG": "en_US", 
+            "LC__FASTMSG": "true", 
+            "LOCPATH": "/usr/lib/nls/loc", 
+            "LOGIN": "root", 
+            "LOGNAME": "root", 
+            "MAIL": "/var/spool/mail/root", 
+            "NLSPATH": "/usr/lib/nls/msg/%L/%N:/usr/lib/nls/msg/%L/%N.cat:/usr/lib/nls/msg/%l.%c/%N:/usr/lib/nls/msg/%l.%c/%N.cat", 
+            "ODMDIR": "/etc/objrepos", 
+            "PATH": "/usr/bin:/etc:/usr/sbin:/usr/ucb:/usr/bin/X11:/sbin:/usr/java7_64/jre/bin:/usr/java7_64/bin", 
+            "PWD": "/", 
+            "SHELL": "/usr/bin/ksh", 
+            "SSH_CLIENT": "10.3.54.29 52134 22", 
+            "SSH_CONNECTION": "10.3.54.29 52134 10.3.54.108 22", 
+            "SSH_TTY": "/dev/pts/4", 
+            "TERM": "xterm", 
+            "TZ": "Europe/Paris", 
+            "USER": "root", 
+            "_": "/usr/bin/python"
+        }, 
+        "fibre_channel_wwn": [], 
+        "fips": false, 
+        "firmware_version": "FW860.80", 
+        "fqdn": "ansible6", 
+        "gather_subset": [
+            "all"
+        ], 
+        "hostname": "ansible6", 
+        "hostnqn": "", 
+        "interfaces": [
+            "en0", 
+            "lo0"
+        ], 
+        "is_chroot": false, 
+        "iscsi_iqn": "iqn.localhost.hostid.7f000001", 
+        "kernel": "2", 
+        "kernel_version": "7", 
+        "lo0": {
+            "device": "lo0", 
+            "flags": [
+                "UP", 
+                "BROADCAST", 
+                "LOOPBACK", 
+                "RUNNING", 
+                "SIMPLEX", 
+                "MULTICAST", 
+                "GROUPRT", 
+                "64BIT", 
+                "LARGESEND", 
+                "CHAIN"
+            ], 
+            "ipv4": [
+                {
+                    "address": "127.0.0.1", 
+                    "broadcast": "127.255.255.255", 
+                    "netmask": "255.0.0.0", 
+                    "network": "127.0.0.0"
+                }
+            ], 
+            "ipv6": [
+                {
+                    "address": "::1%1", 
+                    "prefix": "64"
+                }
+            ], 
+            "macaddress": "unknown", 
+            "mtu": "16896", 
+            "type": "unknown"
+        }, 
+        "lpar_info": "12 ansible6-40fab759-0000001e", 
+        "lsb": {}, 
+        "machine": "00F92BAB4C00", 
+        "memfree_mb": 32, 
+        "memtotal_mb": 4096, 
+        "module_setup": true, 
+        "mounts": [
+            {
+                "block_available": 76811, 
+                "block_size": 4096, 
+                "block_total": 122880, 
+                "block_used": 46069, 
+                "device": "/dev/hd4", 
+                "fstype": "jfs2", 
+                "inode_available": 69918, 
+                "inode_total": 81940, 
+                "inode_used": 12022, 
+                "mount": "/", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 314617856, 
+                "size_total": 503316480, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 44747, 
+                "block_size": 4096, 
+                "block_total": 565248, 
+                "block_used": 520501, 
+                "device": "/dev/hd2", 
+                "fstype": "jfs2", 
+                "inode_available": 44054, 
+                "inode_total": 83135, 
+                "inode_used": 39081, 
+                "mount": "/usr", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 183283712, 
+                "size_total": 2315255808, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 27760, 
+                "block_size": 4096, 
+                "block_total": 90112, 
+                "block_used": 62352, 
+                "device": "/dev/hd9var", 
+                "fstype": "jfs2", 
+                "inode_available": 25277, 
+                "inode_total": 26563, 
+                "inode_used": 1286, 
+                "mount": "/var", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 113704960, 
+                "size_total": 369098752, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 764602, 
+                "block_size": 4096, 
+                "block_total": 1048576, 
+                "block_used": 283974, 
+                "device": "/dev/hd3", 
+                "fstype": "jfs2", 
+                "inode_available": 693823, 
+                "inode_total": 695518, 
+                "inode_used": 1695, 
+                "mount": "/tmp", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 3131809792, 
+                "size_total": 4294967296, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 220061, 
+                "block_size": 4096, 
+                "block_total": 270336, 
+                "block_used": 50275, 
+                "device": "/dev/hd1", 
+                "fstype": "jfs2", 
+                "inode_available": 195751, 
+                "inode_total": 195801, 
+                "inode_used": 50, 
+                "mount": "/home", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 901369856, 
+                "size_total": 1107296256, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 32677, 
+                "block_size": 4096, 
+                "block_total": 32768, 
+                "block_used": 91, 
+                "device": "/dev/hd11admin", 
+                "fstype": "jfs2", 
+                "inode_available": 29105, 
+                "inode_total": 29110, 
+                "inode_used": 5, 
+                "mount": "/admin", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 133844992, 
+                "size_total": 134217728, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 0, 
+                "block_size": 1024, 
+                "block_total": 4294967295, 
+                "block_used": 4294967295, 
+                "device": "/proc", 
+                "fstype": "procfs", 
+                "inode_available": 0, 
+                "inode_total": 0, 
+                "inode_used": 0, 
+                "mount": "/proc", 
+                "options": "rw", 
+                "size_available": 0, 
+                "size_total": 4398046510080, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 45327, 
+                "block_size": 4096, 
+                "block_total": 237568, 
+                "block_used": 192241, 
+                "device": "/dev/hd10opt", 
+                "fstype": "jfs2", 
+                "inode_available": 41558, 
+                "inode_total": 55042, 
+                "inode_used": 13484, 
+                "mount": "/opt", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 185659392, 
+                "size_total": 973078528, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 65444, 
+                "block_size": 4096, 
+                "block_total": 65536, 
+                "block_used": 92, 
+                "device": "/dev/livedump", 
+                "fstype": "jfs2", 
+                "inode_available": 58200, 
+                "inode_total": 58204, 
+                "inode_used": 4, 
+                "mount": "/var/adm/ras/livedump", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 268058624, 
+                "size_total": 268435456, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 228937, 
+                "block_size": 4096, 
+                "block_total": 1048576, 
+                "block_used": 819639, 
+                "device": "/dev/fslv00", 
+                "fstype": "jfs2", 
+                "inode_available": 206740, 
+                "inode_total": 209067, 
+                "inode_used": 2327, 
+                "mount": "/tmp/ossia", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 937725952, 
+                "size_total": 4294967296, 
+                "time": "Mar 17 16:52"
+            }, 
+            {
+                "block_available": 473254, 
+                "block_size": 4096, 
+                "block_total": 2621440, 
+                "block_used": 2148186, 
+                "device": "/dev/fslv01", 
+                "fstype": "jfs2", 
+                "inode_available": 421058, 
+                "inode_total": 450622, 
+                "inode_used": 29564, 
+                "mount": "/oracle", 
+                "options": "rw,log=/dev/hd8", 
+                "size_available": 1938448384, 
+                "size_total": 10737418240, 
+                "time": "Mar 17 16:53"
+            }, 
+            {
+                "block_available": 520238, 
+                "block_size": 4096, 
+                "block_total": 524288, 
+                "block_used": 4050, 
+                "device": "/dev/orasid", 
+                "fstype": "jfs2", 
+                "inode_available": 462517, 
+                "inode_total": 462529, 
+                "inode_used": 12, 
+                "mount": "/oradata/DB2", 
+                "options": "rw,log=/dev/loglv00", 
+                "size_available": 2130894848, 
+                "size_total": 2147483648, 
+                "time": "Mar 17 17:04"
+            }, 
+            {
+                "block_available": 747827, 
+                "block_size": 4096, 
+                "block_total": 786432, 
+                "block_used": 38605, 
+                "device": "/dev/oralogs", 
+                "fstype": "jfs2", 
+                "inode_available": 664760, 
+                "inode_total": 664767, 
+                "inode_used": 7, 
+                "mount": "/oradata/DB2/logs", 
+                "options": "rw,log=/dev/loglv00", 
+                "size_available": 3063099392, 
+                "size_total": 3221225472, 
+                "time": "Mar 17 17:04"
+            }, 
+            {
+                "block_available": 453425, 
+                "block_size": 4096, 
+                "block_total": 786432, 
+                "block_used": 333007, 
+                "device": "/dev/orasystem", 
+                "fstype": "jfs2", 
+                "inode_available": 403070, 
+                "inode_total": 403076, 
+                "inode_used": 6, 
+                "mount": "/oradata/DB2/system", 
+                "options": "rw,log=/dev/loglv00", 
+                "size_available": 1857228800, 
+                "size_total": 3221225472, 
+                "time": "Mar 17 17:04"
+            }, 
+            {
+                "block_available": 260740, 
+                "block_size": 4096, 
+                "block_total": 262144, 
+                "block_used": 1404, 
+                "device": "/dev/orausers", 
+                "fstype": "jfs2", 
+                "inode_available": 231795, 
+                "inode_total": 231800, 
+                "inode_used": 5, 
+                "mount": "/oradata/DB2/users", 
+                "options": "rw,log=/dev/loglv00", 
+                "size_available": 1067991040, 
+                "size_total": 1073741824, 
+                "time": "Mar 17 17:04"
+            }, 
+            {
+                "block_available": 261754, 
+                "block_size": 4096, 
+                "block_total": 262144, 
+                "block_used": 390, 
+                "device": "/dev/oratemp", 
+                "fstype": "jfs2", 
+                "inode_available": 232697, 
+                "inode_total": 232702, 
+                "inode_used": 5, 
+                "mount": "/oradata/DB2/temp", 
+                "options": "rw,log=/dev/loglv00", 
+                "size_available": 1072144384, 
+                "size_total": 1073741824, 
+                "time": "Mar 17 17:04"
+            }, 
+            {
+                "block_available": 461404, 
+                "block_size": 4096, 
+                "block_total": 524288, 
+                "block_used": 62884, 
+                "device": "/dev/oraundo", 
+                "fstype": "jfs2", 
+                "inode_available": 410163, 
+                "inode_total": 410168, 
+                "inode_used": 5, 
+                "mount": "/oradata/DB2/undo", 
+                "options": "rw,log=/dev/loglv00", 
+                "size_available": 1889910784, 
+                "size_total": 2147483648, 
+                "time": "Mar 17 17:04"
+            }
+        ], 
+        "nodename": "ansible6", 
+        "os_family": "AIX", 
+        "pkg_mgr": "yum", 
+        "processor": "PowerPC_POWER8", 
+        "processor_cores": 8, 
+        "processor_count": 1, 
+        "product_name": "IBM,8286-42A", 
+        "product_serial": "102BABV", 
+        "python": {
+            "executable": "/usr/bin/python", 
+            "has_sslcontext": true, 
+            "type": "CPython", 
+            "version": {
+                "major": 2, 
+                "micro": 15, 
+                "minor": 7, 
+                "releaselevel": "final", 
+                "serial": 0
+            }, 
+            "version_info": [
+                2, 
+                7, 
+                15, 
+                "final", 
+                0
+            ]
+        }, 
+        "python_version": "2.7.15", 
+        "real_group_id": 0, 
+        "real_user_id": 0, 
+        "selinux": {
+            "status": "Missing selinux Python library"
+        }, 
+        "selinux_python_present": false, 
+        "service_mgr": "src", 
+        "ssh_host_key_dsa_public": "AAAAB3NzaC1kc3MAAACBAKFk5U6sDlzHcAztn8ZovfeZAZCVeacTFZAZ6OVj69Nas7qBC2eU0tbDlmq7jtjZcCEMopymFAEdoGCBs0fHPcU9XT6hlsIuDsOq4Cexxs2pS33NRslC3mqC5osY0D2OTN9IG1WdDbMmIIUlYn+AwK0K+soY7lib8Y8cEM4jUahJAAAAFQDMosvh2AXTFFkuBleuXe2649k5YwAAAIATvgrwLlQxbw1QZ8f67+ORzzzLN71dSoh4J0I4NL2v8dQhKCV2gcU4jqROGgKlRbJbdtzvVO6/QKhZGieYABTxL+hQTyEeYNpbMV5xwFr9kOT1Q4wh6RN/BuBHTGxIlQvHY5ZkBeU+p5rwwSZs9hMJjhmCNprVc7YP7WHXaUTkgAAAAIAxr3i3fIdkWHB7xZQtU789DuEfXHF1YXO8azmAY0s5OwNUCHgV0KqAXBFB7ahGNmKe8BdmLZVN5vTf0HS+xLgLqsiFDbLVbKgo8krZVysGAslJqD5sIMgndrWM0UiqZZ4UzCeVOhz1oOVcGPODP1fPAkbYe7CrQLCVxnU3abQzXw==", 
+        "ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABAQDYTukUPhYlhzMsqh+fn/wLZ2Z07N4BW2y2tdXr3+lDWl7nGT3bh0kYXfROg3IjZazD3QKhh+7pso+lwTuqS4ad3d3yAB7+SfCKOfoL9FU3GPHXTqkdc2obMPgvfxG+oZmNHZ5vqw7laAp/w7ziycBx9RvrDhXFFU98tOfdE0FT42WdIhrBfBHpvvQtAUK/30iT/KrqYhcFkUXPhjhKFcw2lHseuppGC2p+gzqAuJl2Y4qW6M0HGdbMyCl/Oq3AQbgget10RoJLi2BwR69gcaGXzTsLjV7Aig7IMtKxWS/TJM6N2o9j//qgaagaZN4wNqKV6T0sAW/JyfjuGNmH9jTT", 
+        "swapfree_mb": 491, 
+        "swaptotal_mb": 512, 
+        "system": "AIX", 
+        "user_dir": "/", 
+        "user_gecos": "", 
+        "user_gid": 0, 
+        "user_id": "root", 
+        "user_shell": "/usr/bin/ksh", 
+        "user_uid": 0, 
+        "userspace_bits": "32", 
+        "vgs": {
+            "datavg": [
+                {
+                    "free_pps": "6125", 
+                    "pp_size": "4 megabyte(s)", 
+                    "pv_name": "hdisk1", 
+                    "pv_state": "active", 
+                    "total_pps": "7662"
+                }, 
+                {
+                    "free_pps": "6126", 
+                    "pp_size": "4 megabyte(s)", 
+                    "pv_name": "hdisk2", 
+                    "pv_state": "active", 
+                    "total_pps": "7662"
+                }
+            ], 
+            "rootvg": [
+                {
+                    "free_pps": "3", 
+                    "pp_size": "32 megabyte(s)", 
+                    "pv_name": "hdisk0", 
+                    "pv_state": "active", 
+                    "total_pps": "799"
+                }
+            ]
+        }, 
+        "virtualization_role": "", 
+        "virtualization_type": ""
+    }
+}
+
+TASK [value of free] ******************************************************************************************
+ok: [10.3.54.108] => {
+    "msg": "free"
+}
+
+PLAY RECAP ****************************************************************************************************
+10.3.54.108                : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

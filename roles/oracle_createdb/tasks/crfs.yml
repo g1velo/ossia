@@ -1,0 +1,27 @@
+#- name : ste
+  #block:
+   - name: Creating logical Volumes {{item.lv_name}} size {{item.size}}G
+     aix_lvol:
+       vg: "{{ora_data_vg}}"
+       lv: "{{item.lv_name}}"
+       size: "{{item.size}}G"
+       policy: maximum
+   - name: Creating filesystem "{{ora_data_fs}}/{{ora_sid}}{{item.fs_name}}"
+     aix_filesystem:
+       device: "{{item.lv_name}}"
+       filesystem: "{{ora_data_fs}}/{{ora_sid}}{{item.fs_name}}"
+       state: present
+   - name: Mounting filesystems "{{ora_data_fs}}/{{ora_sid}}{{item.fs_name}}"
+     aix_filesystem:
+       filesystem: "{{ora_data_fs}}/{{ora_sid}}{{item.fs_name}}"
+       state: mounted
+    #  ignore_errors: yes
+   - name: Changing ownnership filesystems "{{ora_data_fs}}/{{ora_sid}}{{item.fs_name}}" to  "{{item.owner}}"
+     file:
+       path: "{{ora_data_fs}}/{{ora_sid}}{{item.fs_name}}"
+       owner: "{{item.owner}}"
+       group: "{{item.group}}"
+       mode:  "{{item.mode}}"
+       state: directory
+       recurse: yes
+#  with_items: "{{ora_fs_list}}"

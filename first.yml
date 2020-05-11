@@ -1,0 +1,18 @@
+---
+- hosts: mynode
+  become: yes
+  vars_files:
+    # User defined variables for infrastructure
+    - var/infra-vars.yml
+  tasks :
+  - name: creating group {{oracle_install_group}} .
+    group : 
+        name: '{{oracle_install_group}}'
+        gid: 1521
+  - name: create  '{{ oracle_user }}'   user
+    user :  
+       name: '{{ oracle_user }}'
+       comment: "Web Admin"
+       password: $6$rounds=656000$bp7zTIl.nar2WQPS$U5CBB15GHnzBqnhY0r7UX65FrBI6w/w9YcAL2kN9PpDaYQIDY6Bi.CAEL6PRRKUqe2bJYgsayyh9NOP1kUy4w.
+       groups:  '{{oracle_install_group}}'
+       append: yes

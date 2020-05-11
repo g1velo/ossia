@@ -1,0 +1,8 @@
+#hostname: ansible9 
+#ip_address: 10.3.54.117 
+hostnames: 
+  - { vmname:  ansible4, number: 3 , sizeGB: 30 , prefix: ansible4_ }
+pvc_flavor: oracle
+pvc_image_name: AIX721-7022-40GB
+skip_copy: 0
+vmname: ''

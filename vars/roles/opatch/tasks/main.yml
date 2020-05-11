@@ -1,0 +1,204 @@
+- name: detecting oracle version to install {{ ora_version }}
+  set_fact:
+    oracle_source_files: "{{oracledbaix18c}}"
+  when: ora_version == "18"
+- name: detecting oracle version to install {{ ora_version }}
+  set_fact:
+    oracle_source_files: "{{oracledbaix18c}}"
+  when: ora_version == "12.1.0.2.0"
+
+- name: create fs
+  aix_filesystem:
+    filesystem:   " {{ ora_ossia_path }} "
+    size: 5G
+    state: present
+    vg: rootvg
+- name: listing iocp attribute to check if reboot is required
+  shell: "lsattr -El iocp0 -a autoconfig -O"
+  register : iocp0
+- name: value of iocp0
+  debug:
+    msg : "{{iocp0.stdout_lines[1]}}"
+- name: setiing var
+  set_fact:
+    attr: "{{iocp0.stdout_lines[1]}}"
+- name: setting ipcp0 to autconfig available
+  shell: chdev -l iocp0 -P -a autoconfig=available
+  when: attr  == "defined"
+- name: generating system reboot script
+  copy:
+    src: roles/aix/files/rebootscript.sh
+    dest: /tmp/rebootscript.sh
+    mode: '0770'
+  when: attr  == "defined"
+- name: executing system reboot script
+  shell : "/tmp/rebootscript.sh"
+  when: attr  == "defined"
+- name: Wait 600 seconds, but only start checking after 120 seconds
+  wait_for_connection:
+    delay: 120
+    timeout: 600
+    sleep: 20
+    connect_timeout: 10
+  when: attr  == "defined"
+- name: creating group {{ora_group}} with gid {{ora_group_gid}}
+  group:
+    name: "{{ora_group}}"
+    gid:  "{{ora_group_gid}}"
+    state: present 
+- name: creating group {{ora_oinstall_group}} with gid {{ora_oinstall_group_gid}}
+  group:
+    name: "{{ora_oinstall_group}}"
+    gid:  "{{ora_oinstall_group_gid}}"
+    state: present 
+- name: creating group {{ora_oper_group}} with gid {{ora_oper_group_gid}}
+  group:
+    name: "{{ora_oper_group}}"
+    gid:  "{{ora_oper_group_gid}}"
+    state: present 
+- name: creating user {{ora_user}} with uid {{ora_user_uid}}
+  user:
+    name: "{{ora_user}}"
+    group: "{{ora_group}}"
+    groups: "{{ora_oinstall_group}},{{ora_oper_group}}" 
+    append: yes
+    uid: "{{ora_user_uid}}"
+- name: create fs
+  aix_filesystem:
+     filesystem:   " {{ora_ossia_path}} "
+     size: 4G
+     state: present
+     vg: rootvg
+  register: ossia
+- name: mount ossia scripts files
+  aix_filesystem:
+    filesystem:   " {{ ora_ossia_path }} "
+    state: mounted
+  ignore_errors: yes
+- name: create /oracle  create fs
+  aix_filesystem:
+    filesystem:    "{{ ora_fs }}"
+    size: 10G
+    state: present
+    vg: rootvg
+- name: mount /oracle
+  aix_filesystem:
+    filesystem:   "{{ ora_fs  }}"
+    state: mounted
+  ignore_errors: yes
+- name: chowner for {{ ora_fs  }} to user {{ora_user}}
+  file:
+    path:  "{{ ora_fs  }}"
+    owner: "{{ora_user}}"
+    group: "{{ora_oinstall_group}}"
+    mode: '0660' 
+    state: directory
+    recurse: yes
+- name: adding lines to {{ora_user}} .profile
+  lineinfile:
+    path: /home/oracle/.profile
+    state: present
+    line: export TEMP=/tmp
+    create: yes 
+- name: adding lines to {{ora_user}} .profile
+  lineinfile:
+    path: /home/oracle/.profile
+    state: present
+    line: export TMPDIR=/tmp
+    create: yes 
+- name: adding lines to {{ora_user}} .profile
+  lineinfile:
+    path: /home/oracle/.profile
+    state: present
+    line: export TMP=/tmp
+    create: yes 
+- name: adding lines to {{ora_user}} .profile
+  lineinfile:
+    path: /home/oracle/.profile
+    state: present
+    line: export AIXTHREAD_SCOPE=S
+    create: yes 
+- name: adding lines to {{ora_user}} .profile
+  lineinfile:
+    path: /home/oracle/.profile
+    state: present
+    line: export ORACLE_HOME={{ora_home}}
+    create: yes 
+- name: adding lines to {{ora_user}} .profile
+  lineinfile:
+    path: /home/oracle/.profile
+    state: present
+    line: export ORACLE_BASE={{ora_fs}}
+    create: yes 
+- name: adding lines to {{ora_user}} .profile
+  lineinfile:
+    path: /home/oracle/.profile
+    state: present
+    line: export PATH=$PATH:{{ora_home}}/bin
+    create: yes 
+- name: adding lines to {{ora_user}} .profile
+  lineinfile:
+    path: /home/oracle/.profile
+    state: present
+    line: export PATH=$PATH:{{ora_home}}/OPatch
+    create: yes 
+- name: adding lines to {{ora_user}} .profile
+  lineinfile:
+    path: /home/oracle/.profile
+    state: present
+    line: export ORACLE_SID={{ora_sid}}
+    create: yes 
+- name: Generating oracle response file Template a file to /etc/oracle_install_rsp_file{{ansible_date_time.epoch}}.rsp
+  template:
+    src: ../templates/oracle_install_rsp_file.rsp
+    dest: "/tmp/oracle_install_rsp_file{{ansible_date_time.epoch}}.rsp"
+    owner: oracle
+    group: dba
+    mode: '0644'
+- debug: 
+    msg: "{{ora_base}} {{ora_home}}"
+- name: changing ownership to {{ora_user}} on {{ora_fs}}
+  file:
+    path: "{{ora_fs}}"
+    state: directory
+    recurse: yes
+    owner: "{{ora_user}}"
+    group: "{{ora_group}}"
+    mode: '0774'
+- name: Extract ossia scripts files
+  unarchive:
+     src: /files/ossia.zip
+     dest:  "{{ ora_ossia_path }}"
+     owner: "{{ora_user}}"
+     group: "{{ora_oinstall_group}}"
+- name: copying oracle Single instance source files
+  unarchive:
+    src: "{{item}}"
+    #src: ../files/p17694377_121020_AIX64-5L_1of8.zip
+    dest: "{{ code_base_dir }}"
+    keep_newer: yes
+    owner: "{{ora_user}}"
+    group: "{{ora_oinstall_group}}"
+  loop:   "{{ oracle_source_files |flatten(levels=1) }}"
+#- name: copying oracle Single instance source files 2/2
+#  unarchive:
+#    src: ../files/p17694377_121020_AIX64-5L_2of8.zip
+#    dest: "{{ code_base_dir }}"
+#    keep_newer: yes
+#    owner: "{{ora_user}}"
+#    group: "{{ora_oinstall_group}}"
+- name: Running rootpre.sh
+  shell: "{{code_base_dir}}/database/rootpre.sh"
+- name: install-home-db | Install Oracle Database Server
+  shell: "{{code_base_dir}}/database/runInstaller  -responseFile /tmp/oracle_install_rsp_file{{ansible_date_time.epoch}}.rsp  -ignoreSysPrereqs -silent -waitforcompletion"
+  become: yes
+  become_method: su
+  become_user: "{{ora_user}}"
+  environment:
+    SKIP_ROOTPRE: "TRUE"
+- name: Running orainstRoot.sh
+  shell: 
+    cmd: "{{ora_inventory}}/orainstRoot.sh"
+- name: Running root.sh
+  shell: 
+    cmd: "{{ora_home}}/root.sh -silent"

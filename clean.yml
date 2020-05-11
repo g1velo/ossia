@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+  tasks :
+    - name: clean Oracle Env
+      shell : /tmp/ossia/remove_ora.sh
+      args:
+        chdir: /tmp/ossia/

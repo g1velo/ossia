@@ -1,0 +1,11 @@
+---
+- hosts: just_added
+  remote_user: root
+  vars_files:
+    - vars/osvars.yml
+    - vars/infra-vars.yml
+    - vars/oracle-vars.yml
+  gather_facts: yes
+  roles:
+    - aix
+

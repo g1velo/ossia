@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+  roles:
+    - aix
+    - oracle_install
+    - oracle_createdb

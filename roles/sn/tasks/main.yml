@@ -1,0 +1,17 @@
+  - os_server_info:
+     server: ansible*
+     #server: "{{hostname}}"
+     filters:
+       vm_state: active
+    register: vms
+  - debug:
+      msg: "{{ vms.openstack_servers }} {{ hostname }}"
+  - set_fact:
+      vm_ip: "{{ vms.openstack_servers 
+                | selectattr('name', 'match', hostname   ) 
+                | map(attribute='accessIPv4') 
+                | list 
+                | first 
+                | default('NOT_FOUND') }}"
+  - debug:
+      msg: "The IP address is  {{ vm_ip }}"

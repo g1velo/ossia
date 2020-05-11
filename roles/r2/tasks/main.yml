@@ -1,0 +1,7 @@
+- name: setting h2 fact
+  debug:
+    msg : "{{h1var}}"
+- name: Add host just_created with variable foo=42
+  add_host:
+    name: 10.3.54.116
+    group: just_added

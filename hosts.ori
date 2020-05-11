@@ -1,0 +1,3 @@
+[PowerVC]
+ansible5 ansible_host=10.3.54.115 ansible_port=22 ansible_user=root
+potpvc13 ansible_host=10.3.44.10 ansible_port=22 ansible_user=root

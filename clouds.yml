@@ -1,0 +1,14 @@
+clouds:
+  pvc:
+    auth:
+      auth_url: http://10.3.44.10:5000/v3/
+      project_name: demo
+      username: root
+      password: powerlinux
+    region_name: RegionOne
+    identity_api_version: 3
+    cacert: /var/lib/awx/projects/pvc_ansible/ossia/powervc.crt
+    user_domain_name: Default
+    project_domain_name: Default
+    project_name: Ansible
+    tenant_name: ibm-default

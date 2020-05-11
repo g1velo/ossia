@@ -1,0 +1,21 @@
+---
+- hosts: just_added
+  vars_files:
+    - vars/osvars.yml
+    - vars/infra-vars.yml
+    - vars/oracle-vars.yml
+  gather_facts: yes
+  roles:
+    - aix
+    - oracle_install
+    - oracle_createdb
+  #tasks:
+    #- name: accessing value 
+      #shell: hostname
+      #register: sn
+    #- debug:
+        #msg : "{{sn}}"
+      #  msg: "{{hostvars['localhost']['h1var']}}"
+
+        #msg:  "{{h1var}}"
+

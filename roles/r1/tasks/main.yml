@@ -1,0 +1,26 @@
+    #- name: transfering aix filesets
+      #copy:
+        #src: /files/aix/filesets/15.1.0.10-IBM-xlf.rte-AIX-FP0010.tar
+        #dest: "{{ora_ossia_path}}"
+        #mode: '0644'
+    - name: installing GNU tar 
+      yum:
+        name: tar , zip ,  unzip
+        state: latest
+
+    - name: creating temp dir for installp
+      file:
+        path: "{{ora_ossia_path}}/installp"
+        state: directory
+        mode: '0755'
+    - name: extracing files 
+      unarchive : 
+        src: /files/aix/filesets/15.1.0.10-IBM-xlf.rte-AIX-FP0010.tar
+        dest: "{{ora_ossia_path}}/installp"
+    - name: installing 
+      installp:
+          name: xlfrte.aix61  
+          #name: all
+          repository_path: "{{ora_ossia_path}}/installp"
+          accept_license: yes
+          state: present

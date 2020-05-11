@@ -1,0 +1,41 @@
+- name: Create a PowerVC Virtual Machine
+  hosts: localhost
+  vars_files:
+    # User defined variables for infrastructure
+    - vars/osvars.yml
+  tasks:
+    - name: Create a new VM instance
+      os_server:
+        state: present
+        name: "{{ hostname }}"
+        image: "{{ pvc_image_name }}"
+        flavor: "{{ pvc_flavor }}"
+        key_name: ste-ansible-ssh-key
+        nics:
+          - net-name: VL354-115-119
+        meta:
+          hostname: "{{ hostname }}"
+          group: ansible-vms
+      register: vm
+
+    - name: Print VM's public IP address
+      debug:
+        var: vm #vm.openstack.public_v4
+
+    - name: Waits for SSH port 22 to open
+      wait_for:
+        host: "{{ vm.openstack.public_v4 }}"
+        port: 22
+      # Creates a new volume
+    - name: creating data volumes
+      os_volume:
+        state: present
+        size: "{{ disk_list.sizeGB }}"
+        display_name: "{{ item }}"
+      with_sequence: start=1 end={{disk_list.number}} format={{disk_list.prefix}}%04x
+    - name: attach volume to host
+      os_server_volume:
+        state: present
+        server: "{{hostname}}"
+        volume: "{{ item }}"
+      with_sequence: start=1 end={{disk_list.number}} format={{disk_list.prefix}}%04x

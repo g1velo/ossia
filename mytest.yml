@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_files:
+    - vars/osvars.yml
+  tasks:
+    - set_fact:
+        NEW_HOST: "ansible7"
+    - name: Register a new value
+      set_fact:
+        IP_ADDR: 
+          - 10.3.54.119
+          - 10.3.54.117
+  
+    - debug: msg="{{NEW_HOST}}"
+  
+    - name: Register dummy host with variable
+      add_host:
+       name: "{{hostname}}" 
+       IP: "{{IP_ADDR}}"
+       HOSTNAME: "{{NEW_HOST}}"
+  
+    #- debug : msg="{{hostvars[hostname]['HOSTNAME']}}"
+    - debug : msg="{{hostvars['localhost']['IP']}}"
+  
+- hosts: newhost
+  gather_facts: false
+  vars_files:
+    - vars/osvars.yml
+  remote_user: root
+  tasks:
+    - name: Echo the output - PLAY1 variable vaule
+      #shell: grep  {{ hostvars['NEW_HOST']['IP'] }}  /etc/hosts
+      shell: hostname
+      register: PLAY2_RESULTS
+
+    - debug: msg="{{PLAY2_RESULTS.stdout}}"
+    #- debug : msg="{{hostvars['localhost']['NEW_HOST']}}" 
+  with_items: "{{ hostvars['NEW_HOST']['IP'] }}"
+  loop_control:
+    loop_var: newhost

@@ -1,0 +1,36 @@
+ora_user: oracle
+ora_user_uid: 1521
+ora_group: dba
+ora_group_gid: 500
+ora_oinstall_group: oinstall
+ora_oinstall_group_gid: 501
+ora_oper_group: oper
+ora_oper_group_gid: 503
+ora_home_profile: /home/{{ora_user}}
+ora_user_id: 1521
+ora_install_group: oinstall
+ora_version: 12.1.0.2.0
+ora_install_type: DB
+ora_mem: 4096
+ora_sid: DB2
+ora_pwd: port2peche
+ora_character_set: WE8MSWIN1252
+ora_fs: /oracle
+ora_data_fs: /oradata
+ora_data_fs_size: 12G
+ora_data_vg: datavg
+ora_data_lv: oradata
+ora_fs_size: 16G
+ora_lv: oraclelv
+ora_fs_vg: rootvg
+ora_inventory: /home/{{ora_user}}/oraInventory
+ora_base: "{{ora_fs}}"
+ora_home: "{{ ora_fs }}/product/{{ ora_version }}/database"
+#ora_passwd: oracle
+ora_ossia_path: /tmp/ossia
+code_base_dir: "{{ ora_ossia_path }}/code"
+ora_code: "{{code_base_dir}}/database/"
+ora_rootpre: "{{code_base_dir}}/database/"
+oracle_home_name: DB2
+ora_tmp_free: 6G
+ora_staging_area: /staging

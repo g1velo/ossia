@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: yes
+  vars_files:
+    # User defined variables for infrastructure
+    - vars/oracle-vars.yml
+  roles:
+    - aix
+    - oracle_install
+    - oracle_createdb

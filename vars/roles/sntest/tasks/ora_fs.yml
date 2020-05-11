@@ -1,0 +1,20 @@
+  - name: listing available disks
+    shell: "lspv | awk '{ if ( $3==\"None\" ){ print $1 } }' "
+    register: freedisks
+  - name: Fact
+    set_fact:
+      mylist: "{{freedisks.stdout_lines}}"
+#- name: deleting ovolume group 
+  #aix_lvg:
+    #vg: "{{ora_data_vg1}}"
+    #state: absent
+  - name: creating volume group 
+    aix_lvg:
+      vg: "{{ora_data_vg1}}"
+      pp_size: 128
+      vg_type: scalable
+      state: present
+      pvs: "{{item}}"
+      #pvs: "{{ item  |  regex_replace(' ', '\\b')  }}"
+    with_items:  "{{mylist}}" 
+

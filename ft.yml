@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  vars_files:
+    - vars/osvars.yml
+    - vars/infra-vars.yml
+    - vars/oracle-vars.yml
+    - vars/oracle-bin.yml
+  roles:
+    - r1

@@ -1,0 +1,67 @@
+  - name: listing available disks
+    shell: "lspv | awk '{ if ( $3==\"None\" ){ print $1 } }' "
+    register: freedisks
+  - name: Fact
+    set_fact:
+      pvlist: "{{freedisks.stdout_lines}}"
+  - name: creating volume group
+    aix_lvg:
+      vg: "{{ora_data_vg}}"
+      pp_size: 4
+      vg_type: scalable
+      state: present
+      pvs: "{{item}}"
+    with_items:  "{{pvlist}}" 
+  - include: crfs.yml
+    with_items: "{{ ora_fs_list}}"
+    loop_control:
+      loop_var: item
+  - name: Generating Database creation template file 
+    template: 
+      src: "../templates/sn.j2.{{ora_version}}"
+      dest: "/tmp/{{ora_sid}}.{{ansible_date_time.epoch}}.dbt"
+      owner: "{{ora_user}}"
+      group: "{{ora_group}}"
+      mode: '0774'
+  - name:  generating database creation script for {{ora_version}} oracle version
+    template:
+      src: ../templates/createdb.12.mfs.ksh
+      dest: /tmp/createdb.12.mfs.ksh
+      owner: "{{ora_user}}"
+      group: "{{ora_group}}"
+      mode: '0744'
+    #when: ora_version == '12.2.0.1.0'
+  - name: Creating database
+    shell: /tmp/createdb.12.mfs.ksh
+    become: yes
+    become_method: su
+    become_user: "{{ora_user}}"
+  - name: creating and configuring listener
+    shell: "{{ora_home}}/bin/netca -silent -responsefile {{ora_home}}/assistants/netca/netca.rsp"
+    become_method: su
+    become: yes
+    become_user:  "{{ora_user}}"
+  - name: set database at autostart
+    lineinfile:
+      path: /etc/oratab
+      regexp: '^{{ ora_sid }}:'
+      line: "{{ora_sid}}:{{ora_home}}:Y"
+      backup: yes
+  - name:  generating startup shutodwn script
+    template:
+      src: ../templates/dbora
+      dest: /etc/dbora
+      owner: "{{ora_user}}"
+      group: "{{ora_group}}"
+      mode: '0750'
+  - name: Create symbolic links to the dbora script
+    file:
+      src: /etc/dbora
+      dest: /etc/rc.d/rc2.d/S99dbora
+      state: link
+  - name: Create symbolic links to the dbora script
+    file:
+      src: /etc/dbora
+      dest: /etc/rc.d/rc2.d/K01dbora
+      state: link
+

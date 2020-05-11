@@ -1,0 +1,11 @@
+    - name: setting h1 fact
+      set_fact:
+        h1var: h1fact
+    - name: lookup 0 
+      debug: msg="Querying 198.51.100.23 for IPv4 address for example.com. produces {{ lookup('dig', 'power.com', '@10.3.54.115') }}"
+    - name:  lookup 1
+      debug: msg="Reverse DNS for 10.3.54.115 is {{ lookup('dig', '10.3.54.115/PTR') }}"
+    - name:  lookup 2 
+      debug: msg="Reverse DNS for 10.3.54.116 is {{ lookup('dig', '116.54.3.10.in-addr.arpa.', 'qtype=PTR') }}"
+    - name:  lookup 3 
+      debug: msg="Reverse DNS for 10.3.54.117 is {{ lookup('dig', '10.3.54.117/PTR') }}"

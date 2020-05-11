@@ -1,0 +1,13 @@
+
+umask 022
+export TEMP=/tmp
+export TMP=/tmp
+export TMPDIR=/tmp
+export AIXTHREAD_SCOPE=S
+
+export ORACLE_HOME={{ora_home}}
+export ORACLE_BASE={{ora_fs}}
+export PATH=\$PATH:{{ora_home}}/bin
+export PATH=\$PATH:{{ora_home}}/OPatch
+export ORACLE_SID={{ora_sid}}
+

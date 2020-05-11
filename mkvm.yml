@@ -1,0 +1,23 @@
+    - name: Create a new VM instance
+      os_server:
+        state: present
+        name: "{{ hostname }}"
+        image: "{{ pvc_image_name }}"
+        flavor: "{{ pvc_flavor }}"
+        key_name: tower-ansible-ssh-key
+        nics:
+          - net-name: VL354-115-119
+        meta:
+          hostname: "{{ hostname }}"
+          group: ansible-vms
+      register: vm
+
+    - name: Print VM's public IP address
+      debug:
+        var: vm #vm.openstack.public_v4
+
+    - name: Waits for SSH port 22 to open
+      wait_for:
+        host: "{{ vm.openstack.public_v4 }}"
+        port: 22
+      # Creates a new volume
